@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Licenses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <h2>All Licenses</h2>
+    <table border="1">
+        <tr>
+            <th>License ID</th>
+            <th>User</th>
+            <th>Last Login</th>
+            <th>Login Count</th>
+            <th>Expiration Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for license in licenses %}
+        <tr>
+            <td>{{ license.id }}</td>
+            <td>{{ license.user }}</td>
+            <td>{{ license.lastLogin }}</td>
+            <td>{{ license.loginCount }}</td>
+            <td>{{ license.expirationDate }}</td>
+            <td>
+                <form action="/edit_license/{{ license.id }}" method="post">
+                    <input type="text" name="new_user_name" placeholder="New User Name">
+                    <button type="submit">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form action="/delete_license/{{ license.id }}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Create New License</a>
+</body>
+</html>
